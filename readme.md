@@ -44,8 +44,8 @@ If you want create subform you can do it something like that:
 Next you can assemble your form elements. Its very similar to forms in ZendFramework.
 
 	$form
-	->add(array(null, 'name', array(
-		'label' => 'Name and Surname',
+	->add(array(null, 'formFieldName', array(// if passed null default class Xes_Form_Field is used 
+		'label' => 'Value used as field label',
 		'attr' => array(
 			'class' => 'text-field', // those attributes are used by form
 		),
@@ -56,11 +56,11 @@ Next you can assemble your form elements. Its very similar to forms in ZendFrame
 			array('Xes_Validator_NotNull', 'This param is required!'), // used for form validation
 		),
 		'decorators' => array(// each array is equivalent for 'new param[0](param[1], param[2], ...)'
-			array('Xes_Decorator_Tag', 'value', 'div', array('class' => 'text-field-container'),),
+			array('Xes_Decorator_Tag', 'value', 'div', array('class' => 'input-field-container-class'),),
 			array('Xes_Decorator_FormFieldLabel', 'label', array('class' => 'label-class'), array('position' => Xes_Decorator::PREPEND)), // for displaying label
-			array('Xes_Decorator_FormFieldErrors', 'errors', array('class' => 'errors-list'), array('position' => Xes_Decorator::APPEND)), // for displaying errors
-			array('Xes_Decorator_Tag', 'header', 'h3', array(), 'But is a lot easier than in ZF!', array('position' => Xes_Decorator::PREPEND)), // field will be prepended with header tag
-			array('Xes_Decorator_Tag', 'fieldset', 'div', array(), 'Strange Place for adding header!', array('position' => Xes_Decorator::OVERRIDE)), // field will be embraced with div tag
+			array('Xes_Decorator_FormFieldErrors', 'errors', array('class' => 'errors-list-class'), array('position' => Xes_Decorator::APPEND)), // for displaying errors
+			array('Xes_Decorator_Tag', 'header', 'h3', array('class' => 'strange-header-class'), 'Strange Place for adding header!', array('position' => Xes_Decorator::PREPEND)), // field will be prepended with header tag
+			array('Xes_Decorator_Tag', 'fieldset', 'div', array('class' => 'full-composited-field-class'), 'Will be ignored as position is override', array('position' => Xes_Decorator::OVERRIDE)), // field will be embraced with div tag
 		),
 		'errorBubbling' => false, // if errors should be pass to parent element
 	)));
@@ -68,8 +68,8 @@ Next you can assemble your form elements. Its very similar to forms in ZendFrame
 Or alternatively (equivalent of above method):
 
 	$form
-	->add(new Xes_Form_Field('name', array(
-		'label' => 'Name and Surname',
+	->add(new Xes_Form_Field('formFieldName', array(
+		'label' => 'Value used as field label',
 		'attr' => array(
 			'class' => 'text-field', // those attributes are used by form
 		),
@@ -80,16 +80,51 @@ Or alternatively (equivalent of above method):
 			new Xes_Validator_NotNull('This param is required!'), // used for form validation
 		),
 		'decorators' => array(// each array is equivalent for 'new param[0](param[1], param[2], ...)'
-			new Xes_Decorator_Tag('value', 'div', array('class' => 'text-field-container'),),
+			new Xes_Decorator_Tag('value', 'div', array('class' => 'input-field-container-class'),),
 			new Xes_Decorator_FormFieldLabel('label', array('class' => 'label-class'), array('position' => Xes_Decorator::PREPEND)), // for displaying label
-			new Xes_Decorator_FormFieldErrors('errors', array('class' => 'errors-list'), array('position' => Xes_Decorator::APPEND)), // for displaying errors
-			new Xes_Decorator_Tag('header', 'h3', array(), 'But is a lot easier than in ZF!', array('position' => Xes_Decorator::PREPEND)), // field will be prepended with header tag
-			new Xes_Decorator_Tag'('fieldset', 'div', array(), 'Strange Place for adding header!', array('position' => Xes_Decorator::OVERRIDE)), // field will be embraced with div tag
+			new Xes_Decorator_FormFieldErrors('errors', array('class' => 'errors-list-class'), array('position' => Xes_Decorator::APPEND)), // for displaying errors
+			new Xes_Decorator_Tag('header', 'h3', array('class' => 'strange-header-class'), 'Strange Place for adding header!', array('position' => Xes_Decorator::PREPEND)), // field will be prepended with header tag
+			new Xes_Decorator_Tag'('fieldset', 'div', array('class' => 'full-composited-field-class'), 'Will be ignored as position is override', array('position' => Xes_Decorator::OVERRIDE)), // field will be embraced with div tag
 		),
 		'errorBubbling' => false, // if errors should be pass to parent element
 	)));
- 
- To populate form with data and validate it.
+
+To change form elements you can ask for them by their formFieldName or decoratorName
+
+	$form->formFieldName->getDecorator('decoratorName')->getNode()->addCssClass('another-css-class');
+
+In this way you can even add decorators that will decorate decorator base output (I don`t know if it`s even posible in Zend Framework):
+
+	$form->formField
+	->getDecorator()
+	->setDecorators(// those decorators are for form field
+		array(
+			array('Xes_Decorator_Tag', 'tag1', 'div', array('class' => 'field-decorator-1'),),// default override
+			array('Xes_Decorator_FormFieldLabel', 'label', array('class' => 'field-decorator-2'), array('position' => Xes_Decorator::PREPEND)), // for displaying label
+			array('Xes_Decorator_Tag', 'tag2', 'div', array('class' => 'field-decorator-3'),),// default override
+		)
+	)
+	->getDecorator('label')// those decorators are for label not for form field
+	->setDecorators(
+		array(
+			array('Xes_Decorator_Tag', 'star', 'div', array('class' => 'label-decorator-1'), '*', array('position' => Xes_Decorator::APPEND)),// default override
+			array('Xes_Decorator_Tag', 'tag', 'div', array('class' => 'label-decorator-2')),// default override
+		)
+	);
+
+This will result in:
+
+	<div class="field-decorator-3">
+		<div class="label-decorator-2">
+			<label class="field-decorator-2" for="fieldId">Value of field label</label>
+			<span class="label-decorator-1">*</span>
+		</div>
+		<div class="field-decorator-1">
+			<input type="text" name="formField" value="value of field"/>
+		</div>
+	</div>
+
+To populate form with data and validate it.
  
 	$data = array(
 		'mainFormFieldName1' => 1,
@@ -108,7 +143,8 @@ Or alternatively (equivalent of above method):
 	);
 	$form->setValue($data); // populates form with data
 	$form->isValid(); // returns true if data is valid form must be first populated width data by using setValue
- 
+
+	
 TODO
 ---------------------
 
