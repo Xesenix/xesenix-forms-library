@@ -14,7 +14,7 @@ $form = new Xes_Form('test');
 $subform = new Xes_Form('subform');
 
 $subform
-->setTag(null)//disable form tag as it will be subform
+->setTag(null) // disable form tag as it will be used as subform
 ->add(array('Xes_Form_Field_Select', 'size', array(
 	'label' => 'I would choose',
 	'options' => array(
@@ -64,19 +64,19 @@ $subform
 ->getDecorator()
 ->addDecorator(//example from adding decorator object
 	new Xes_Decorator_Tag(
-		'description1',// decorator id unique otherwise it can overrided exising one
-		'p',// tag
-		array(),// attributes
-		'This is sub form.',// tag content
+		'description1', // decorator id unique otherwise it can overrided exising one
+		'p', // tag
+		array(), // attributes
+		'This is sub form.', // tag content
 		array('position' => Xes_Decorator::PREPEND)// decorator options
 	)
 )
 ->addDecorator(//example from adding decorator object
 	new Xes_Decorator_Tag(
-		'description2',// decorator id unique otherwise it can overrided exising one
-		'div',// tag
-		array('style' => 'padding: 8px; margin: 5px 0; border: 1px solid #ddd; background-color: #dfd; color: #444;'),// attributes
-		'',// tag content
+		'description2', // decorator id unique otherwise it can overrided exising one
+		'div', // tag
+		array('style' => 'padding: 8px; margin: 5px 0; border: 1px solid #ddd; background-color: #dfd; color: #444;'), // attributes
+		'', // tag content
 		array('position' => Xes_Decorator::OVERRIDE)// decorator options
 	)
 );
@@ -111,7 +111,7 @@ $form
 		'class' => 'email',
 	),
 	'formatters' => array(// each array is equivalent for 'new param[0](param[1], param[2], ...)'
-		array('Xes_Formatter_NullToString', 'null'),
+		array('Xes_Formatter_NullToString', ''),
 	),
 	'validators' => array(// each array is equivalent for 'new param[0](param[1], param[2], ...)'
 		array('Xes_Validator_NotNull', 'Please fill with valid email addres.'),
@@ -154,27 +154,27 @@ $form
 ->addDecorator(// example form config array
 	array(// order as in class constructor
 		'Xes_Decorator_FormFieldErrors', // special decorator class for handling fields errors
-		'errors',// decorator id unique otherwise it can overrided exising one
-		array('class' => 'errors'),// attributes
+		'errors', // decorator id unique otherwise it can overrided exising one
+		array('class' => 'errors'), // attributes
 		array('position' => Xes_Decorator::APPEND)// decorator options
 	)
 )
 ->addDecorator(// example form config array
 	array(// order as in class constructor
-		'Xes_Decorator_Tag',// decorator class
-		'description1',// decorator id unique otherwise it can overrided exising one
-		'p',// tag
-		array(),// attributes
-		'Probably better place for adding things to form.',// tag content
+		'Xes_Decorator_Tag', // decorator class
+		'description1', // decorator id unique otherwise it can overrided exising one
+		'p', // tag
+		array(), // attributes
+		'Probably better place for adding things to form.', // tag content
 		array('position' => Xes_Decorator::PREPEND)// decorator options
 	)
 )
 ->addDecorator(//example from adding decorator object
 	new Xes_Decorator_Tag(
-		'description2',// decorator id unique otherwise it can overrided exising one
-		'div',// tag
-		array('style' => 'padding: 8px; background-color: #ffd; color: #444;'),// attributes
-		'I hope this example shows most of thise little framework capabilities.',// tag content
+		'description2', // decorator id unique otherwise it can overrided exising one
+		'div', // tag
+		array('style' => 'padding: 8px; background-color: #ffd; color: #444;'), // attributes
+		'I hope this example shows most of thise little framework capabilities.', // tag content
 		array('position' => Xes_Decorator::PREPEND)// decorator options
 	)
 );
@@ -182,21 +182,21 @@ $form
 $form->email->getDecorator('label')
 ->addDecorator(
 	array(// order as in class constructor
-		'Xes_Decorator_Tag',// decorator class
-		'special1',// decorator id unique otherwise it can overrided exising one
-		'strong',// tag
-		array(),// attributes
-		'Special label decoration: ',// tag content
+		'Xes_Decorator_Tag', // decorator class
+		'special1', // decorator id unique otherwise it can overrided exising one
+		'strong', // tag
+		array(), // attributes
+		'Special label decoration: ', // tag content
 		array('position' => Xes_Decorator::PREPEND)// decorator options
 	)
 )
 ->addDecorator(
 	array(// order as in class constructor
-		'Xes_Decorator_Tag',// decorator class
-		'special2',// decorator id unique otherwise it can overrided exising one
-		'strong',// tag
-		array(),// attributes
-		'*',// tag content
+		'Xes_Decorator_Tag', // decorator class
+		'special2', // decorator id unique otherwise it can overrided exising one
+		'strong', // tag
+		array(), // attributes
+		'*', // tag content
 		array('position' => Xes_Decorator::APPEND)// decorator options
 	)
 );
@@ -216,10 +216,10 @@ if ($request->getMethod() === 'POST')
 	{
 		$form->getDecorator()->addDecorator(//example from adding decorator object
 			new Xes_Decorator_Tag(
-				'description3',// decorator id unique otherwise it can overrided exising one
-				'div',// tag
-				array('class' => 'valid-form', 'style' => 'padding: 4px; background-color: #0c0; color: #fff;'),// attributes
-				'Everything is OK.',// tag content
+				'description3', // decorator id unique otherwise it can overrided exising one
+				'div', // tag
+				array('class' => 'valid-form', 'style' => 'padding: 4px; background-color: #0c0; color: #fff;'), // attributes
+				'Everything is OK.', // tag content
 				array('position' => Xes_Decorator::APPEND)// decorator options
 			)
 		);
@@ -228,10 +228,10 @@ if ($request->getMethod() === 'POST')
 	{
 		$form->getDecorator()->addDecorator(//example from adding decorator object
 			new Xes_Decorator_Tag(
-				'description3',// decorator id unique otherwise it can overrided exising one
-				'div',// tag
-				array('class' => 'invalid-form', 'style' => 'padding: 4px; background-color: #c00; color: #fff;'),// attributes
-				'You have some errors.',// tag content
+				'description3', // decorator id unique otherwise it can overrided exising one
+				'div', // tag
+				array('class' => 'invalid-form', 'style' => 'padding: 4px; background-color: #c00; color: #fff;'), // attributes
+				'You have some errors.', // tag content
 				array('position' => Xes_Decorator::APPEND)// decorator options
 			)
 		);
