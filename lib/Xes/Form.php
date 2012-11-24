@@ -73,26 +73,47 @@ class Xes_Form extends Xes_Form_Field {
 		}
 		
 		return $result;
-	}	
-		public function add($name, $childClass = null, $options = array())	{		if ($childClass === null)		{			$childClass = 'Xes_Form_Field';		}
-				$this->_children[$name] = new $childClass($name, $options);
-		$this->_children[$name]->setParent($this);
-		
-		return $this;	}
+	}
 	
 	
-	public function setData($data)
+	public function add($config)
 	{
-		if (isset($data[$this->getName()]))
+		if (!$config instanceof Xes_Form_Field)
 		{
-			$data = $data[$this->getName()];
+			$className = array_shift($config);
 			
-			foreach($this->_children as $child)
+			if ($className === null)
 			{
-				if (isset($data[$child->getName()]))
-				{
-					$child->setValue($data[$child->getName()]);
-				}
+				$className = 'Xes_Form_Field';
+			}
+			
+			$reflection = new ReflectionClass($className);
+			$field = $reflection->newInstanceArgs($config); 
+			
+			if (!$field instanceof Xes_Form_Field)
+			{
+				throw new Exception('Xes_Form::add() - object isn`t instance of Xes_Form_Field!');
+			}
+		}
+		else
+		{
+			$field = $config;
+		}
+		
+		$this->_children[$field->getName()] = $field;
+		$this->_children[$field->getName()]->setParent($this);
+		
+		return $this;
+	}
+	
+	
+	public function setValue($data)
+	{
+		foreach($this->_children as $child)
+		{
+			if (isset($data[$child->getName()]))
+			{
+				$child->setValue($data[$child->getName()]);
 			}
 		}
 		
@@ -100,13 +121,13 @@ class Xes_Form extends Xes_Form_Field {
 	}
 	
 	
-	public function getData()
+	public function getValue()
 	{
-		$data = array();
+		$data = array($this->getName() => array());
 		
 		foreach($this->_children as $child)
 		{
-			$data[$child->getName()] = $child->getValue();
+			$data[$this->getName()][$child->getName()] = $child->getValue();
 		}
 		
 		return $data;

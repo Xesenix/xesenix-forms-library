@@ -285,8 +285,13 @@ class Xes_Form_Field extends Xes_Dom_Node implements Xes_Visitable_NodeInterface
 	}
 	
 	
-	public function &getDecorator()
+	public function getDecorator($name = null)
 	{
+		if ($name !== null)
+		{
+			return $this->_decorator->getDecorator($name);
+		}
+		
 		return $this->_decorator;
 	}
 	

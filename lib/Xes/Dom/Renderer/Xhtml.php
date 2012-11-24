@@ -23,15 +23,20 @@ class Xes_Dom_Renderer_Xhtml implements Xes_Dom_Renderer_Interface {
 	
 	public function renderNode($tag, array $attributes = array(), $content = '')
 	{
+		if ($tag === null)
+		{
+			return $content;
+		}
+		
 		$attr = $this->renderAttributes($attributes);
 		
 		if (empty($content))
 		{
-			$xhtml = "<$tag$attr/>";
+			$xhtml = "<$tag$attr/>\n";
 		}
 		else
 		{
-			$xhtml = "<$tag$attr>$content</$tag>";
+			$xhtml = "<$tag$attr>\n$content\n</$tag>\n";
 		}
 		
 		return $xhtml;

@@ -6,11 +6,11 @@
 
 class Xes_Decorator_Tag extends Xes_Decorator {
 	
-	public function __construct($name, $tag, $attributes = array(), $config = array())
+	public function __construct($name, $tag, $attributes = array(), $content = '', $config = array())
 	{
 		parent::__construct($name, $config);
 		
-		$this->setNode(new Xes_Dom_Node($tag, $attributes));
+		$this->setNode(new Xes_Dom_Node($tag, $attributes, $content));
 	}
 	
 	
@@ -30,20 +30,31 @@ class Xes_Decorator_Tag extends Xes_Decorator {
 	
 	public function decorate($content)
 	{
-		$content = parent::decorate($content);
 		$node = $this->getNode();
+		
+		
+		if ($this->getPosition() != Xes_Decorator::OVERRIDE)
+		{
+			$node = $node->render();
+		}
+		else
+		{
+			$node->setContent($content);
+			$node = $node->render();
+		}
+		
+		$node = parent::decorate($node);
 		
 		switch($this->getPosition())
 		{
 			case Xes_Decorator::PREPEND:
-				$content = $node->render() . $content ;
+				$content = $node . $content;
 			break;
 			case Xes_Decorator::APPEND:
-				$content = $content . $node->render();
+				$content = $content . $node;
 			break;
 			case Xes_Decorator::OVERRIDE:
-				$node->setContent($content);
-				$content = $node->render();
+				$content = $node;
 			break;
 		}
 		
