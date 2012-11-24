@@ -21,7 +21,7 @@ When finished go see examples.
 Example
 ---------------------
 
-It`s in early stage of development but can be quite usefull see examples.
+It's in early stage of development but can be quite usefull see examples.
 
 	<?php
 	// autoloader and request handling may be altered if you run it from diffrent path then examples are placed.
@@ -93,7 +93,7 @@ To change form elements you can ask for them by their formFieldName or decorator
 
 	$form->formFieldName->getDecorator('decoratorName')->getNode()->addCssClass('another-css-class');
 
-In this way you can even add decorators that will decorate decorator base output (I don`t know if it`s even posible in Zend Framework):
+In this way you can even add decorators that will decorate decorator base output (I don't know if it's even posible in Zend Framework):
 
 	$form->formField
 	->getDecorator()
