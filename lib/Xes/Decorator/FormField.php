@@ -11,7 +11,7 @@ class Xes_Decorator_FormField extends Xes_Decorator {
 	
 	
 	/**
-	 * @param Xes_Form_Field
+	 * @var Xes_Form_Field
 	 */
 	protected $_field;
 	

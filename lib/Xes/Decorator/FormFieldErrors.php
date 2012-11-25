@@ -7,6 +7,11 @@
 class Xes_Decorator_FormFieldErrors extends Xes_Decorator_FormField {
 	
 	
+	/**
+	 * Attributes of error list 
+	 * TODO: use them ...
+	 * @var array
+	 */
 	protected $_attributes = array();
 	
 	

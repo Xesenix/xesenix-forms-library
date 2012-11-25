@@ -26,8 +26,6 @@ class Xes_Form_Field_Option extends Xes_Form_Field {
 		$value = $this->getValue();
 		$value = $this->_formatter->format($value);
 		
-		$id = $this->getFullId();
-		$name = $this->getFullName();
 		$label = $this->getLabel();
 		$options = $this->_options;
 		

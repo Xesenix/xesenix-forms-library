@@ -7,6 +7,10 @@
 class Xes_Decorator_FormFieldLabel extends Xes_Decorator_FormField {
 	
 	
+	/**
+	 * List of attributes for label node.
+	 * @var array
+	 */
 	protected $_attributes = array();
 	
 	

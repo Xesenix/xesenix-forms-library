@@ -7,9 +7,20 @@
 class Xes_Dom_Renderer_Xhtml implements Xes_Dom_Renderer_Interface {
 	
 	
+	/**
+	 * Instance of renderer for xhtml nodes.
+	 * Singleton pattern.
+	 *
+	 * @var Xes_Dom_Renderer_Xhtml
+	 */
 	protected static $_instance = null;
 	
 	
+	/**
+	 * Singleton pattern.
+	 * 
+	 * @result Xes_Dom_Renderer_Xhtml
+	 */
 	public static function getInstance()
 	{
 		if (self::$_instance === null)
@@ -18,6 +29,11 @@ class Xes_Dom_Renderer_Xhtml implements Xes_Dom_Renderer_Interface {
 		}
 		
 		return self::$_instance;
+	}
+	
+	
+	protected function __construct()
+	{
 	}
 	
 	

@@ -6,6 +6,7 @@
 
 interface Xes_Visitable_ValueInterface {
 	
+	
 	function getValue();
 	
 	

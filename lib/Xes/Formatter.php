@@ -4,9 +4,21 @@
  * @copyright Copyright (c) 2010, Xesenix Paweł Kapalla - all rights reserved.
  */
 
+
 class Xes_Formatter implements Xes_Formatter_Interface {
 	
 	
+	/**
+	 * Name used to identify formatter. 
+	 * @var string
+	 */
+	protected $_name = null;
+	
+	
+	/**
+	 * List of object in composition.
+	 * @var array
+	 */
 	protected $_formatters = array();
 	
 	

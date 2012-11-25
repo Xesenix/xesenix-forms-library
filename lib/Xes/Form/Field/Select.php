@@ -6,6 +6,12 @@
 
 class Xes_Form_Field_Select extends Xes_Form_Field {
 	
+	
+	/**
+	 * List of select options and optgroups
+	 * TODO: use of composition pattern
+	 * @var array()
+	 */
 	protected $_children = array();
 	
 	
@@ -79,6 +85,9 @@ class Xes_Form_Field_Select extends Xes_Form_Field {
 	}
 	
 	
+	/**
+	 * TODO: move to node renderer
+	 */
 	public function renderChildren()
 	{
 		$children = '';
@@ -94,10 +103,9 @@ class Xes_Form_Field_Select extends Xes_Form_Field {
 	
 	public function render()
 	{
-		$value = $this->getValue();
 		$id = $this->getFullId();
 		$name = $this->getFullName();
-		$options = $this->_options;
+		// TODO: move to node renderer
 		$children = $this->renderChildren();
 		
 		$attributes = array_merge(

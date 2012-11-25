@@ -16,12 +16,24 @@ class Xes_Decorator implements Xes_Decorator_Interface {
 	const OVERRIDE = 'override';
 	
 	
+	/**
+	 * Name used to identify decorator. 
+	 * @var string
+	 */
 	protected $_name = null;
 	
 	
+	/**
+	 * Special configuration that controls decorator behaviour. For example 'placment' that defines where decorator is added.
+	 * @var array
+	 */
 	protected $_config = array();
 	
 	
+	/**
+	 * List of object in composition.
+	 * @var array
+	 */
 	protected $_decorators = array();
 	
 	

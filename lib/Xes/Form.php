@@ -6,12 +6,25 @@
 
 class Xes_Form extends Xes_Form_Field {
 	
+	
+	/**
+	 * Tag used to render node. 
+	 * @var string
+	 */
 	protected $_tag = 'form';
 	
 	
+	/**
+	 * Name used to identify form also used as namespace for variables. 
+	 * @var string
+	 */
 	protected $_name = 'form';
 	
-		protected $_children = array();
+	
+	/**
+	 * List of object in composition.
+	 * @var array
+	 */	protected $_children = array();
 	
 	
 	public function __construct($name, $options = array())

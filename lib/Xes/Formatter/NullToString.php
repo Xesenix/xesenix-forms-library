@@ -7,7 +7,11 @@
 class Xes_Formatter_NullToString extends Xes_Formatter implements Xes_Formatter_Interface {
 	
 	
-	protected $_value = '';
+	/**
+	 * String represetation of null value.
+	 * @var string
+	 */
+	protected $_nullValue;
 	
 	
 	public function __construct($name, $nullValue = '')

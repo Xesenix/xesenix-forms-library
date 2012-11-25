@@ -6,6 +6,7 @@
 
 interface Xes_Validator_Interface {
 	
+	
 	function validate(Xes_Visitable_NodeInterface $element);
 	
 	

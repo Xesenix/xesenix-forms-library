@@ -7,15 +7,32 @@
 class Xes_Dom_Node {
 	
 	
+	/**
+	 * Tag used for rendering node.
+	 * @var string
+	 */
 	protected $_tag = '';
 	
 	
+	/**
+	 * Static content of tag.
+	 * TODO: work over tree like structure of nodes 
+	 * @var string
+	 */
 	protected $_content = '';
 	
 	
+	/**
+	 * List of attributes for node.
+	 * @var array
+	 */
 	protected $_attributes = array(); 
 	
 	
+	/**
+	 * Renderer used for rendering of node.
+	 * @var Xes_Dom_Renderer_Interface
+	 */
 	protected $_renderer = null;
 	
 	

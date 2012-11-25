@@ -142,11 +142,14 @@ To populate form with data and validate it.
 		),
 	);
 	$form->setValue($data); // populates form with data
-	$form->isValid(); // returns true if data is valid form must be first populated width data by using setValue
+	$form->isValid(); // returns true if data is valid form must be first populated with data by using setValue
 
-	
 TODO
 ---------------------
 
+* Add more field and validator types.
+* Easier way to group fields.
+* Add path access for fields and decorators.
+* Add some multilanguage support.
 * Build helper classes for fast building form fields. 
 * Build serialization and deserialization helpers.

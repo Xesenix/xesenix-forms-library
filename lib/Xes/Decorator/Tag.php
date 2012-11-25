@@ -6,6 +6,14 @@
 
 class Xes_Decorator_Tag extends Xes_Decorator {
 	
+	
+	/**
+	 * DOM node that will be rendered for decoration.
+	 * @var Xes_Dom_Node
+	 */
+	protected $_node = null;
+	
+	
 	public function __construct($name, $tag, $attributes = array(), $content = '', $config = array())
 	{
 		parent::__construct($name, $config);

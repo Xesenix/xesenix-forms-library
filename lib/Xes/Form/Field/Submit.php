@@ -18,7 +18,6 @@ class Xes_Form_Field_Submit extends Xes_Form_Field {
 	public function render()
 	{
 		$tag = $this->getTag();
-		$value = $this->getLabel();
 		$options = $this->_options;
 		$attributes = array_merge(
 			$this->getAttributes(),

@@ -7,9 +7,6 @@
 class Xes_Form_Field_Checkbox extends Xes_Form_Field {
 	
 	
-	protected $_checked;
-	
-	
 	public function __construct($name, array $options = array())
 	{
 		parent::__construct($name, $options);
