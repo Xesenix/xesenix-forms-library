@@ -27,7 +27,6 @@ class Xes_Form_Field_Label extends Xes_Form_Field {
 		$tag = $this->getTag();
 		$id = $this->getFullId();
 		$value = $this->getValue();
-		$value = $this->_formatter->format($value);
 		
 		$attributes = array_merge(
 			$this->getAttributes(),

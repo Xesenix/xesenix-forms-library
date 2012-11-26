@@ -153,7 +153,7 @@ class Xes_Form_Field extends Xes_Dom_Node implements Xes_Visitable_NodeInterface
 	
 	public function getValue()
 	{
-		return $this->_value;
+		return $this->_formatter->format($this->_value);
 	}
 	
 	
@@ -308,7 +308,6 @@ class Xes_Form_Field extends Xes_Dom_Node implements Xes_Visitable_NodeInterface
 	public function render()
 	{
 		$value = $this->getValue();
-		$value = $this->_formatter->format($value);
 		
 		$tag = $this->getTag();
 		$id = $this->getFullId();

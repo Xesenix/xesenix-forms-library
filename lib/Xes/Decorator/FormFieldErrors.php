@@ -41,19 +41,23 @@ class Xes_Decorator_FormFieldErrors extends Xes_Decorator_FormField {
 	{
 		$field = $this->getField();
 		$errors = $field->renderErrors();
-		$errors = parent::decorate($errors);
 		
-		switch($this->getPosition())
+		if ($errors !== '')
 		{
-			case Xes_Decorator::PREPEND:
-				$content = $errors . $content;
-			break;
-			case Xes_Decorator::APPEND:
-				$content = $content . $errors;
-			break;
-			case Xes_Decorator::OVERRIDE:
-				$content = $errors;
-			break;
+			$errors = parent::decorate($errors);
+			
+			switch($this->getPosition())
+			{
+				case Xes_Decorator::PREPEND:
+					$content = $errors . $content;
+				break;
+				case Xes_Decorator::APPEND:
+					$content = $content . $errors;
+				break;
+				case Xes_Decorator::OVERRIDE:
+					$content = $errors;
+				break;
+			}
 		}
 		
 		return $content;

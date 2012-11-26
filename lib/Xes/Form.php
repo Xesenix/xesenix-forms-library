@@ -136,11 +136,11 @@ class Xes_Form extends Xes_Form_Field {
 	
 	public function getValue()
 	{
-		$data = array($this->getName() => array());
+		$data = array();
 		
 		foreach($this->_children as $child)
 		{
-			$data[$this->getName()][$child->getName()] = $child->getValue();
+			$data[$child->getName()] = $child->getValue();
 		}
 		
 		return $data;

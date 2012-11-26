@@ -8,6 +8,14 @@ class Xes_Dom_Renderer_Xhtml implements Xes_Dom_Renderer_Interface {
 	
 	
 	/**
+	 * List of tags that should be rendered with both open and close tags.
+	 * TODO: add all other
+	 * @var array
+	 */
+	protected $_blockTags = array('a', 'div', 'optgroup', 'option', 'p', 'select', 'span', 'textarea');
+	
+	
+	/**
 	 * Instance of renderer for xhtml nodes.
 	 * Singleton pattern.
 	 *
@@ -46,13 +54,13 @@ class Xes_Dom_Renderer_Xhtml implements Xes_Dom_Renderer_Interface {
 		
 		$attr = $this->renderAttributes($attributes);
 		
-		if (empty($content))
+		if (empty($content) && !in_array($tag, $this->_blockTags))
 		{
 			$xhtml = "<$tag$attr/>\n";
 		}
 		else
 		{
-			$xhtml = "<$tag$attr>\n$content\n</$tag>\n";
+			$xhtml = "<$tag$attr>$content</$tag>\n";
 		}
 		
 		return $xhtml;

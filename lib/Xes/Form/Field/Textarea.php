@@ -4,15 +4,15 @@
  * @copyright Copyright (c) 2010, Xesenix Paweł Kapalla - all rights reserved.
  */
 
-class Xes_Form_Field_Option extends Xes_Form_Field {
+class Xes_Form_Field_Textarea extends Xes_Form_Field {
 	
 	
-	public function __construct($name, $options = array())
-	{
-		parent::__construct($name, $options);
-		
-		$this->setValue($name);
-	}
+	/**
+	 * Tag used as container for label field.
+	 * @var string
+	 */
+	protected $_tag = 'textarea';
+	
 	
 	public function getDefaultOptions()
 	{
@@ -21,19 +21,23 @@ class Xes_Form_Field_Option extends Xes_Form_Field {
 		);
 	}
 	
+	
 	public function render()
 	{
+		$tag = $this->getTag();
+		$id = $this->getFullId();
+		$name = $this->getFullName();
 		$value = $this->getValue();
-		$label = $this->getLabel();
-		$options = $this->_options;
+		$value = $this->_formatter->format($value);
 		
 		$attributes = array_merge(
 			$this->getAttributes(),
 			array(
-				'value' => $value,
+				'id' => $id,
+				'name' => $name,
 			)
 		);
 		
-		return $this->_renderer->renderNode('option', $attributes, $label);
+		return $this->_renderer->renderNode($tag, $attributes, $value);
 	}
 }
