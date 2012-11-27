@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Xesenix Forms Library by Xesenix</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Xesenix Forms Library</h1>
+          <h2>It's a micro framework for creating forms in php.</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/Xesenix/xes-forms-library/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/Xesenix/xes-forms-library/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/Xesenix/xes-forms-library" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>Xesenix Forms Library</h1>
+
+<h2>About</h2>
+
+<p>Its a micro framework for creating forms in php.
+To start using just download run composer for adding dependencies and class autoloader.</p>
+
+<h2>How to start</h2>
+
+<p>First download this project second run composer to install dependencies:</p>
+
+<pre><code>./php composer.phar install
+</code></pre>
+
+<p>When finished go see examples.</p>
+
+<h2>Example</h2>
+
+<p>It's in early stage of development but can be quite usefull see examples.</p>
+
+<pre><code>&lt;?php
+// autoloader and request handling may be altered if you run it from diffrent path then examples are placed.
+include(__DIR__ . '/../vendor/autoload.php');
+
+$form = new Xes_Form('formNameUsedAssNamespaceForItsData');
+</code></pre>
+
+<p>For main form (not subforms) you should setup action and method. </p>
+
+<pre><code>$form
+-&gt;setAction('?validate')
+-&gt;setMethod('POST');
+</code></pre>
+
+<p>If you want create subform you can do it something like that:</p>
+
+<pre><code>$subform = new Xes_Form('subform');
+$subform-&gt;setTag(null); // disable form tag as it will be used as subform
+$form-&gt;add($subform);
+</code></pre>
+
+<p>Next you can assemble your form elements. Its very similar to forms in ZendFramework.</p>
+
+<pre><code>$form
+-&gt;add(array(null, 'formFieldName', array(// if passed null default class Xes_Form_Field is used 
+    'label' =&gt; 'Value used as field label',
+    'attr' =&gt; array(
+        'class' =&gt; 'text-field', // those attributes are used by form
+    ),
+    'formatters' =&gt; array(// each array is equivalent for 'new param[0](param[1], param[2], ...)'
+        array('Xes_Formatter_NullToString', ''), // converts field element value to string 
+    ),
+    'validators' =&gt; array(// each array is equivalent for 'new param[0](param[1], param[2], ...)'
+        array('Xes_Validator_NotNull', 'This param is required!'), // used for form validation
+    ),
+    'decorators' =&gt; array(// each array is equivalent for 'new param[0](param[1], param[2], ...)'
+        array('Xes_Decorator_Tag', 'value', 'div', array('class' =&gt; 'input-field-container-class'),),
+        array('Xes_Decorator_FormFieldLabel', 'label', array('class' =&gt; 'label-class'), array('position' =&gt; Xes_Decorator::PREPEND)), // for displaying label
+        array('Xes_Decorator_FormFieldErrors', 'errors', array('class' =&gt; 'errors-list-class'), array('position' =&gt; Xes_Decorator::APPEND)), // for displaying errors
+        array('Xes_Decorator_Tag', 'header', 'h3', array('class' =&gt; 'strange-header-class'), 'Strange Place for adding header!', array('position' =&gt; Xes_Decorator::PREPEND)), // field will be prepended with header tag
+        array('Xes_Decorator_Tag', 'fieldset', 'div', array('class' =&gt; 'full-composited-field-class'), 'Will be ignored as position is override', array('position' =&gt; Xes_Decorator::OVERRIDE)), // field will be embraced with div tag
+    ),
+    'errorBubbling' =&gt; false, // if errors should be pass to parent element
+)));
+</code></pre>
+
+<p>Or alternatively (equivalent of above method):</p>
+
+<pre><code>$form
+-&gt;add(new Xes_Form_Field('formFieldName', array(
+    'label' =&gt; 'Value used as field label',
+    'attr' =&gt; array(
+        'class' =&gt; 'text-field', // those attributes are used by form
+    ),
+    'formatters' =&gt; array(// each array is equivalent for 'new param[0](param[1], param[2], ...)'
+        new Xes_Formatter_NullToString(''), // converts field element value to string 
+    ),
+    'validators' =&gt; array(// each array is equivalent for 'new param[0](param[1], param[2], ...)'
+        new Xes_Validator_NotNull('This param is required!'), // used for form validation
+    ),
+    'decorators' =&gt; array(// each array is equivalent for 'new param[0](param[1], param[2], ...)'
+        new Xes_Decorator_Tag('value', 'div', array('class' =&gt; 'input-field-container-class'),),
+        new Xes_Decorator_FormFieldLabel('label', array('class' =&gt; 'label-class'), array('position' =&gt; Xes_Decorator::PREPEND)), // for displaying label
+        new Xes_Decorator_FormFieldErrors('errors', array('class' =&gt; 'errors-list-class'), array('position' =&gt; Xes_Decorator::APPEND)), // for displaying errors
+        new Xes_Decorator_Tag('header', 'h3', array('class' =&gt; 'strange-header-class'), 'Strange Place for adding header!', array('position' =&gt; Xes_Decorator::PREPEND)), // field will be prepended with header tag
+        new Xes_Decorator_Tag'('fieldset', 'div', array('class' =&gt; 'full-composited-field-class'), 'Will be ignored as position is override', array('position' =&gt; Xes_Decorator::OVERRIDE)), // field will be embraced with div tag
+    ),
+    'errorBubbling' =&gt; false, // if errors should be pass to parent element
+)));
+</code></pre>
+
+<p>To change form elements you can ask for them by their formFieldName or decoratorName</p>
+
+<pre><code>$form-&gt;formFieldName-&gt;getDecorator('decoratorName')-&gt;getNode()-&gt;addCssClass('another-css-class');
+</code></pre>
+
+<p>In this way you can even add decorators that will decorate decorator base output (I don't know if it's even posible in Zend Framework):</p>
+
+<pre><code>$form-&gt;formField
+-&gt;getDecorator()
+-&gt;setDecorators(// those decorators are for form field
+    array(
+        array('Xes_Decorator_Tag', 'tag1', 'div', array('class' =&gt; 'field-decorator-1'),),// default override
+        array('Xes_Decorator_FormFieldLabel', 'label', array('class' =&gt; 'field-decorator-2'), array('position' =&gt; Xes_Decorator::PREPEND)), // for displaying label
+        array('Xes_Decorator_Tag', 'tag2', 'div', array('class' =&gt; 'field-decorator-3'),),// default override
+    )
+)
+-&gt;getDecorator('label')// those decorators are for label not for form field
+-&gt;setDecorators(
+    array(
+        array('Xes_Decorator_Tag', 'star', 'div', array('class' =&gt; 'label-decorator-1'), '*', array('position' =&gt; Xes_Decorator::APPEND)),// default override
+        array('Xes_Decorator_Tag', 'tag', 'div', array('class' =&gt; 'label-decorator-2')),// default override
+    )
+);
+</code></pre>
+
+<p>This will result in:</p>
+
+<pre><code>&lt;div class="field-decorator-3"&gt;
+    &lt;div class="label-decorator-2"&gt;
+        &lt;label class="field-decorator-2" for="fieldId"&gt;Value of field label&lt;/label&gt;
+        &lt;span class="label-decorator-1"&gt;*&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="field-decorator-1"&gt;
+        &lt;input type="text" name="formField" value="value of field"/&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>To populate form with data and validate it.</p>
+
+<pre><code>$data = array(
+    'mainFormFieldName1' =&gt; 1,
+    'mainFormFieldName2' =&gt; 'asdfs',
+    ...,
+    'subFormFieldName' =&gt; array(
+        'subFormFieldName1' =&gt; 1,
+        'subFormFieldName2' =&gt; 'zxc',
+        ...,
+        'subsubFormFieldName' =&gt; array(
+            'subsubFormFieldName1' =&gt; 1,
+            'subsubFormFieldName2' =&gt; 'zxc',
+            ...,
+        ),
+    ),
+);
+$form-&gt;setValue($data); // populates form with data
+$form-&gt;isValid(); // returns true if data is valid form must be first populated with data by using setValue
+</code></pre>
+
+<h2>TODO</h2>
+
+<ul>
+<li>Add more field and validator types.</li>
+<li>Easier way to group fields.</li>
+<li>Add path access for fields and decorators.</li>
+<li>Add some multilanguage support.</li>
+<li>Build helper classes for fast building form fields. </li>
+<li>Build serialization and deserialization helpers.</li>
+</ul>
+        </section>
+
+        <footer>
+          Xesenix Forms Library is maintained by <a href="https://github.com/Xesenix">Xesenix</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
