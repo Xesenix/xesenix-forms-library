@@ -1,5 +1,5 @@
 {
-	"name": "xesenix forms",
+	"name": "xesenix-forms-library",
 	"description": "formularze",
 	"autoload": {
 		"psr-0": { "": "lib/" }
