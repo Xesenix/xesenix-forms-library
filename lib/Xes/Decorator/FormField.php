@@ -4,9 +4,8 @@
  * @copyright Copyright (c) 2010, Xesenix Paweł Kapalla - all rights reserved.
  */
 
-class Xes_Decorator_FormField extends Xes_Decorator {
-	
-	
+class Xes_Decorator_FormField extends Xes_Decorator
+{
 	protected $_name = null;
 	
 	

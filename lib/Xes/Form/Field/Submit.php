@@ -4,9 +4,8 @@
  * @copyright Copyright (c) 2010, Xesenix Paweł Kapalla - all rights reserved.
  */
 
-class Xes_Form_Field_Submit extends Xes_Form_Field {
-	
-	
+class Xes_Form_Field_Submit extends Xes_Form_Field
+{
 	public function getDefaultOptions()
 	{
 		return array(

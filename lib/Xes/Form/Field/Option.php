@@ -4,9 +4,8 @@
  * @copyright Copyright (c) 2010, Xesenix Paweł Kapalla - all rights reserved.
  */
 
-class Xes_Form_Field_Option extends Xes_Form_Field {
-	
-	
+class Xes_Form_Field_Option extends Xes_Form_Field
+{
 	public function __construct($name, $options = array())
 	{
 		parent::__construct($name, $options);

@@ -4,9 +4,8 @@
  * @copyright Copyright (c) 2010, Xesenix Paweł Kapalla - all rights reserved.
  */
 
-class Xes_Decorator_FormFieldLabel extends Xes_Decorator_FormField {
-	
-	
+class Xes_Decorator_FormFieldLabel extends Xes_Decorator_FormField
+{
 	/**
 	 * List of attributes for label node.
 	 * @var array

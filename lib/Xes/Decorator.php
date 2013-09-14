@@ -4,7 +4,18 @@
  * @copyright Copyright (c) 2010, Xesenix Paweł Kapalla - all rights reserved.
  */
 
-class Xes_Decorator implements Xes_Decorator_Interface {
+class Xes_Decorator implements Xes_Decorator_Interface
+{
+	public static $objectInstances = 0;
+	
+	
+	protected $_objectInstance;
+	
+	
+	public function getObjectInstanceName()
+	{
+		return __CLASS__ . '(' . $this->_objectInstance . ')';
+	}
 	
 	
 	const PREPEND = 'prepend';
@@ -39,6 +50,8 @@ class Xes_Decorator implements Xes_Decorator_Interface {
 	
 	public function __construct($name, $config = array())
 	{
+		$this->_objectInstance = ++self::$objectInstances;
+		
 		$this->setName($name);
 		$this->setConfig($config);
 	}
@@ -152,6 +165,17 @@ class Xes_Decorator implements Xes_Decorator_Interface {
 	}
 	
 	
+	public function removeDecorator($name)
+	{
+		if (isset($this->_decorators[$name]))
+		{
+			unset($this->_decorators[$name]);
+		}
+		
+		return $this;
+	}
+	
+	
 	public function decorate($content)
 	{
 		foreach ($this->getDecorators() as $decorator)
@@ -160,5 +184,18 @@ class Xes_Decorator implements Xes_Decorator_Interface {
 		}
 		
 		return $content;
+	}
+	
+	
+	public function __clone()
+	{
+		// var_dump('CLONNING: ' . $this->getObjectInstanceName());
+		
+		foreach ($this->_decorators as $key => $decorator)
+		{
+			$this->_decorators[$key] = clone $decorator;
+		}
+		
+		$this->_objectInstance = ++self::$objectInstances;
 	}
 }

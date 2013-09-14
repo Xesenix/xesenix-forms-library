@@ -4,9 +4,8 @@
  * @copyright Copyright (c) 2010, Xesenix Paweł Kapalla - all rights reserved.
  */
 
-class Xes_Form extends Xes_Form_Field {
-	
-	
+class Xes_Form extends Xes_Form_Field
+{
 	/**
 	 * Tag used to render node. 
 	 * @var string

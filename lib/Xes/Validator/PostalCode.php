@@ -4,9 +4,8 @@
  * @copyright Copyright (c) 2010, Xesenix Paweł Kapalla - all rights reserved.
  */
 
-class Xes_Validator_PostalCode implements Xes_Validator_Interface {
-	
-	
+class Xes_Validator_PostalCode implements Xes_Validator_Interface
+{
 	/**
 	 * Message that will be displayed if validation returns false.
 	 * @var string

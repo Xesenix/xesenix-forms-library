@@ -4,9 +4,8 @@
  * @copyright Copyright (c) 2010, Xesenix Paweł Kapalla - all rights reserved.
  */
 
-class Xes_Formatter_StripTags extends Xes_Formatter implements Xes_Formatter_Interface {
-	
-	
+class Xes_Formatter_StripTags extends Xes_Formatter implements Xes_Formatter_Interface
+{
 	/**
 	 * Tags to strip out all if empty.
 	 * @var array

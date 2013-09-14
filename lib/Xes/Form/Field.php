@@ -1,8 +1,7 @@
 <?php
 
-class Xes_Form_Field extends Xes_Dom_Node implements Xes_Visitable_NodeInterface {
-	
-	
+class Xes_Form_Field extends Xes_Dom_Node implements Xes_Visitable_ValueInterface
+{
 	protected $_tag = 'input';
 	
 	
@@ -28,9 +27,6 @@ class Xes_Form_Field extends Xes_Dom_Node implements Xes_Visitable_NodeInterface
 	
 	
 	protected $_formatter = null;
-	
-	
-	protected $_decorator;
 	
 	
 	public function __construct($name, array $options = array())
@@ -277,25 +273,6 @@ class Xes_Form_Field extends Xes_Dom_Node implements Xes_Visitable_NodeInterface
 	}
 	
 	
-	public function setDecorator(Xes_Decorator_Intreface &$decorator)
-	{
-		$this->_decorator = $decorator;
-		
-		return $this;
-	}
-	
-	
-	public function getDecorator($name = null)
-	{
-		if ($name !== null)
-		{
-			return $this->_decorator->getDecorator($name);
-		}
-		
-		return $this->_decorator;
-	}
-	
-	
 	public function getDefaultOptions()
 	{
 		return array(
@@ -323,16 +300,15 @@ class Xes_Form_Field extends Xes_Dom_Node implements Xes_Visitable_NodeInterface
 			)
 		);
 		
-		return $this->_renderer->renderNode($tag, $attributes);
+		$content = $this->_renderer->renderNode($tag, $attributes);
+		$content = $this->_decorator->decorate($content);
+		
+		return $content;
 	}
 	
 	
 	public function __toString()
 	{
-		$content = $this->render();
-		
-		$content = $this->_decorator->decorate($content);
-		
-		return $content;
+		return $this->render();
 	}
 }
