@@ -4,10 +4,7 @@
  * @copyright Copyright (c) 2010, Xesenix Paweł Kapalla - all rights reserved.
  */
 
-interface Xes_Decorator_Interface
+interface Xes_Interface_RenderableInterface
 {
-	public function getDecorator($name);
-	
-	
-	public function decorate($value);
+	public function render();
 }

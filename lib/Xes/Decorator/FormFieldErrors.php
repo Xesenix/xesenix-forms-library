@@ -4,9 +4,8 @@
  * @copyright Copyright (c) 2010, Xesenix Paweł Kapalla - all rights reserved.
  */
 
-class Xes_Decorator_FormFieldErrors extends Xes_Decorator_FormField {
-	
-	
+class Xes_Decorator_FormFieldErrors extends Xes_Decorator_FormField
+{
 	/**
 	 * Attributes of error list 
 	 * TODO: use them ...

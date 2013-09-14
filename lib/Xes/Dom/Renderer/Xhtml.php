@@ -4,9 +4,8 @@
  * @copyright Copyright (c) 2010, Xesenix Paweł Kapalla - all rights reserved.
  */
 
-class Xes_Dom_Renderer_Xhtml implements Xes_Dom_Renderer_Interface {
-	
-	
+class Xes_Dom_Renderer_Xhtml implements Xes_Dom_Renderer_Interface
+{
 	/**
 	 * List of tags that should be rendered with both open and close tags.
 	 * TODO: add all other

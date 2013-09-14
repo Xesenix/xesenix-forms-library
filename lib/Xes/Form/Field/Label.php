@@ -4,9 +4,8 @@
  * @copyright Copyright (c) 2010, Xesenix Paweł Kapalla - all rights reserved.
  */
 
-class Xes_Form_Field_Label extends Xes_Form_Field {
-	
-	
+class Xes_Form_Field_Label extends Xes_Form_Field
+{
 	/**
 	 * Tag used as container for label field.
 	 * @var string

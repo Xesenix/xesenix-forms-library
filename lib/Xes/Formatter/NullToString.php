@@ -4,9 +4,8 @@
  * @copyright Copyright (c) 2010, Xesenix Paweł Kapalla - all rights reserved.
  */
 
-class Xes_Formatter_NullToString extends Xes_Formatter implements Xes_Formatter_Interface {
-	
-	
+class Xes_Formatter_NullToString extends Xes_Formatter implements Xes_Formatter_Interface
+{
 	/**
 	 * String represetation of null value.
 	 * @var string
